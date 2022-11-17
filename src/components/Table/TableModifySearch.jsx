@@ -1,10 +1,17 @@
-import { Button, Row, Table, Modal, Input, Col } from "antd";
+import { Button, Row, Table, Modal, Input, Col, Form, Tooltip } from "antd";
 import React from "react";
 import { useState } from "react";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
+import Icon from "@ant-design/icons/lib/components/Icon";
 const TableModify = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [editingPerson, setEditingPerson] = useState(null);
+  const [personModal, setPersonModal] = useState(false);
+  const [form] = Form.useForm();
   const deletePerson = (record) => {
     Modal.confirm({
       centered: true,
@@ -22,9 +29,11 @@ const TableModify = () => {
     setIsEdit(true);
     setEditingPerson({ ...record });
   };
-  const setEditing = () =>{
-    
-  }
+  const resetEditing = () => {
+    setIsEdit(false);
+    setEditingPerson(null);
+  };
+
   const [dataSource, setDataSource] = useState([
     { id: 1, name: "John", email: "john.com", address: "beritnton 32/2" },
     { id: 2, name: "David", email: "David.com", address: "beritnton 32/2" },
@@ -33,7 +42,50 @@ const TableModify = () => {
   ]);
   const columns = [
     { key: "1", title: "ID", dataIndex: "id" },
-    { key: "2", title: "Name", dataIndex: "name" },
+    {
+      key: "2",
+      title: "Name",
+      dataIndex: "name",
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => {
+        return (
+          <div style={{ padding: "20px 30px", display: "flex", gap: "10px" }}>
+            <Input
+              autoFocus
+              placeholder="Search.."
+              onPressEnter={() => {
+                confirm();
+              }}
+              // onBlur={() => {
+              //   confirm();
+              // }}
+              value={selectedKeys[0]}
+              onChange={(e) => {
+                setSelectedKeys(e.target.value ? [e.target.value] : []);
+                // confirm({ closeDropdown: false });
+              }}
+            />
+            <Button type="primary" onClick={() => confirm}>
+              <SearchOutlined />
+              Search
+            </Button>
+            <Button type="danger" onClick={() => clearFilters}>
+              Reset
+            </Button>
+          </div>
+        );
+      },
+      filterIcon: () => {
+        return <SearchOutlined />;
+      },
+      onFilter: (value, record) => {
+        return record?.name?.toLowerCase()?.includes(value?.toLowerCase());
+      },
+    },
     { key: "3", title: "Email", dataIndex: "email" },
     { key: "4", title: "Address", dataIndex: "address" },
     {
@@ -57,17 +109,26 @@ const TableModify = () => {
       },
     },
   ];
-
+  const openPersonModal = () => {
+    setPersonModal(!personModal);
+  };
   const addPerson = () => {
+    console.log(form.getFieldValue("name"));
     const newPerson = {
       id: parseInt(Math.random() * 1000),
-      name: "name",
-      email: "email",
-      address: "address",
+      name: form.getFieldValue("name"),
+      email: form.getFieldValue("email"),
+      address: form.getFieldValue("address"),
     };
-
     setDataSource((pre) => {
       return [newPerson, ...pre];
+    });
+    setPersonModal(!personModal);
+    form.setFieldsValue({
+      name: null,
+      editEndowmentType: null,
+      email: null,
+      address: null,
     });
   };
   return (
@@ -84,16 +145,53 @@ const TableModify = () => {
           flexDirection: "column",
         }}
       >
-        <Button onClick={addPerson} block type="primary">
+        <Form form={form}>
+          <Modal
+            title="Basic Modal"
+            open={personModal}
+            onOk={addPerson}
+            onCancel={openPersonModal}
+          >
+            <Col>
+              <Form.Item name="name" label="name" labelCol={{ span: 24 }}>
+                <Input placeholder="name" />
+              </Form.Item>
+            </Col>
+            <Col>
+              <Form.Item name="email" label="email" labelCol={{ span: 24 }}>
+                <Input placeholder="email" />
+              </Form.Item>
+            </Col>
+            <Col>
+              <Form.Item name="address" label="address" labelCol={{ span: 24 }}>
+                <Input placeholder="address" />
+              </Form.Item>
+            </Col>
+          </Modal>
+        </Form>
+        <Table columns={columns} dataSource={dataSource}></Table>
+        <Button block onClick={openPersonModal} type="primary">
           Add a new person
         </Button>
-        <Table columns={columns} dataSource={dataSource}></Table>
         <Modal
           title="Edit Person"
           open={isEdit}
           okText="Save"
-          onCancel={() => setIsEdit(false)}
-          onOk={() => setIsEdit(false)}
+          onCancel={() => {
+            resetEditing();
+          }}
+          onOk={() => {
+            setDataSource((pre) => {
+              return pre.map((person) => {
+                if (person.id === editingPerson.id) {
+                  return editingPerson;
+                } else {
+                  return person;
+                }
+              });
+            });
+            resetEditing();
+          }}
           centered
         >
           <Row style={{ flexDirection: "column", gap: "10px" }}>

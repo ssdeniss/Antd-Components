@@ -1,9 +1,7 @@
-
-
+@primary-color: red;
 body {
   background-color: rgba(51, 51, 255, 0.12);
 }
 .ant-rate {
   display: flex;
-  
 }
