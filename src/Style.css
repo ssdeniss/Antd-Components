@@ -4,3 +4,16 @@ body {
 .ant-rate {
   display: flex;
 }
+
+html::-webkit-scrollbar {
+  width: 5px;
+}
+
+html::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #1890ff;
+  border-radius: 10px;
+}

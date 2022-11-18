@@ -3,11 +3,11 @@ import React, { useState } from "react";
 
 const FormValidation = () => {
   const [formValue, setFormValue] = useState(null);
+  const [form] = Form.useForm();
   return (
     <div>
       <div
         style={{
-          display: "flex",
           gap: "20px",
           padding: "20px",
           margin: "20px",
@@ -21,8 +21,9 @@ const FormValidation = () => {
           <Form
             onFinish={(values) => {
               setFormValue(values);
-              console.log(values);
+              form.resetFields();
             }}
+            form={form}
           >
             <Row style={{ gap: "10px", flexWrap: "nowrap" }}>
               <Form.Item
