@@ -11,6 +11,9 @@ import {
   Form,
   Rate,
   Button,
+  Divider,
+  Avatar,
+  Steps,
 } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import {
@@ -22,8 +25,13 @@ import {
   UploadOutlined,
   InboxOutlined,
 } from "@ant-design/icons";
+import { Typography } from "antd";
+import { useState } from "react";
+const { Paragraph } = Typography;
+const { Step } = Steps;
 const Inputs = () => {
   const arr = ["item_1", "item_2", "item_3"];
+  const [current, setCurrent] = useState(1);
   return (
     <div>
       <div
@@ -67,10 +75,12 @@ const Inputs = () => {
           <DatePicker.RangePicker picker="time" />
           <Checkbox>Checkbox</Checkbox>
           <Radio>Radio</Radio>
+
           <Switch
             checkedChildren={<CheckCircleFilled />}
             unCheckedChildren={<CloseCircleFilled />}
           />
+          <Avatar icon={<UserOutlined />} />
         </div>
         <div style={{ display: "inline-flex", gap: "20px" }}>
           <Form.Item>
@@ -84,6 +94,12 @@ const Inputs = () => {
                 name="files"
                 action="/upload.do"
                 style={{ padding: "5px" }}
+                multiple
+                accept=".jpg, .png"
+                beforeUpload={(file) => {
+                  console.log({ file });
+                  return false;
+                }}
               >
                 <p className="ant-upload-drag-icon">
                   <InboxOutlined />
@@ -125,7 +141,33 @@ const Inputs = () => {
               }}
             />
           </Form.Item>
+          <Paragraph
+            style={{ width: "500px" }}
+            ellipsis={{ rows: 2, expandable: true, symbol: "Show more" }}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
+            ipsum, dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+            dolor sit, amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+            consectetur, adipiscing elit.
+          </Paragraph>
         </div>
+
+        <Steps
+          labelPlacement="vertical"
+          current={current}
+          onChange={(c) => {
+            setCurrent(c);
+          }}
+        >
+          <Step title="Start"></Step>
+          <Step title="In progress"></Step>
+          <Step title="Finished"></Step>
+        </Steps>
+        <Divider style={{ borderColor: "green" }}>Divider</Divider>
+        <Divider style={{ borderColor: "red" }} dashed orientation="left">
+          Divider
+        </Divider>
       </div>
     </div>
   );

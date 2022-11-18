@@ -65,7 +65,7 @@ const TableFilter = () => {
           columns={columns}
           dataSource={data}
           loading={loading}
-          pagination={{ pageSize: 10 }}
+          pagination={{ pageSize: 5 }}
         ></Table>
       </div>
     </div>
