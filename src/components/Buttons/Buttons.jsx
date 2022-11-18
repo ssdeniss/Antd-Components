@@ -3,16 +3,19 @@ import { Button } from "antd";
 import { HeatMapOutlined } from "@ant-design/icons";
 const Buttons = () => {
   return (
-    <div>
+    <div
+      style={{
+        padding: "20px",
+        margin: "20px",
+        border: "1px dashed blue",
+      }}
+    >
       <div
         style={{
-          gap: "20px",
-          padding: "20px",
-          margin: "20px",
-          border: "1px dashed blue",
           display: "inline-flex",
           justifyContent: "center",
           alignItems: "center",
+          gap: "20px",
         }}
       >
         <Button type="default">default</Button>

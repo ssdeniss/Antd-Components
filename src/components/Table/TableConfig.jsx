@@ -27,20 +27,18 @@ const TableConfig = () => {
     },
   ];
   return (
-    <div>
-      <div
-        style={{
-          gap: "20px",
-          padding: "20px",
-          margin: "20px",
-          border: "1px dashed blue",
-          display: "inline-flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Table dataSource={data} columns={columns}></Table>
-      </div>
+    <div
+      style={{
+        gap: "20px",
+        padding: "20px",
+        margin: "20px",
+        border: "1px dashed blue",
+        display: "inline-flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Table dataSource={data} columns={columns}></Table>
     </div>
   );
 };

@@ -132,108 +132,106 @@ const TableModify = () => {
     });
   };
   return (
-    <div>
-      <div
-        style={{
-          gap: "20px",
-          padding: "20px",
-          margin: "20px",
-          border: "1px dashed blue",
-          display: "inline-flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Form form={form}>
-          <Modal
-            title="Basic Modal"
-            open={personModal}
-            onOk={addPerson}
-            onCancel={openPersonModal}
-          >
-            <Col>
-              <Form.Item name="name" label="name" labelCol={{ span: 24 }}>
-                <Input placeholder="name" />
-              </Form.Item>
-            </Col>
-            <Col>
-              <Form.Item name="email" label="email" labelCol={{ span: 24 }}>
-                <Input placeholder="email" />
-              </Form.Item>
-            </Col>
-            <Col>
-              <Form.Item name="address" label="address" labelCol={{ span: 24 }}>
-                <Input placeholder="address" />
-              </Form.Item>
-            </Col>
-          </Modal>
-        </Form>
-        <Table columns={columns} dataSource={dataSource}></Table>
-        <Button block onClick={openPersonModal} type="primary">
-          Add a new person
-        </Button>
+    <div
+      style={{
+        gap: "20px",
+        padding: "20px",
+        margin: "20px",
+        border: "1px dashed blue",
+        display: "inline-flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      <Form form={form}>
         <Modal
-          title="Edit Person"
-          open={isEdit}
-          okText="Save"
-          onCancel={() => {
-            resetEditing();
-          }}
-          onOk={() => {
-            setDataSource((pre) => {
-              return pre.map((person) => {
-                if (person.id === editingPerson.id) {
-                  return editingPerson;
-                } else {
-                  return person;
-                }
-              });
-            });
-            resetEditing();
-          }}
-          centered
+          title="Basic Modal"
+          open={personModal}
+          onOk={addPerson}
+          onCancel={openPersonModal}
         >
-          <Row style={{ flexDirection: "column", gap: "10px" }}>
-            <Col>
-              <label style={{ marginBottom: "5px" }}>Name</label>
-              <Input
-                placeholder="Name"
-                value={editingPerson?.name}
-                onChange={(e) => {
-                  setEditingPerson((prev) => {
-                    return { ...prev, name: e.target.value };
-                  });
-                }}
-              />
-            </Col>
-            <Col>
-              <label style={{ marginBottom: "5px" }}>Email</label>
-              <Input
-                placeholder="Email"
-                value={editingPerson?.email}
-                onChange={(e) => {
-                  setEditingPerson((prev) => {
-                    return { ...prev, email: e.target.value };
-                  });
-                }}
-              />
-            </Col>
-            <Col>
-              <label style={{ marginBottom: "5px" }}>Address</label>
-              <Input
-                placeholder="Address"
-                value={editingPerson?.address}
-                onChange={(e) => {
-                  setEditingPerson((prev) => {
-                    return { ...prev, address: e.target.value };
-                  });
-                }}
-              />
-            </Col>
-          </Row>
+          <Col>
+            <Form.Item name="name" label="name" labelCol={{ span: 24 }}>
+              <Input placeholder="name" />
+            </Form.Item>
+          </Col>
+          <Col>
+            <Form.Item name="email" label="email" labelCol={{ span: 24 }}>
+              <Input placeholder="email" />
+            </Form.Item>
+          </Col>
+          <Col>
+            <Form.Item name="address" label="address" labelCol={{ span: 24 }}>
+              <Input placeholder="address" />
+            </Form.Item>
+          </Col>
         </Modal>
-      </div>
+      </Form>
+      <Table columns={columns} dataSource={dataSource}></Table>
+      <Button block onClick={openPersonModal} type="primary">
+        Add a new person
+      </Button>
+      <Modal
+        title="Edit Person"
+        open={isEdit}
+        okText="Save"
+        onCancel={() => {
+          resetEditing();
+        }}
+        onOk={() => {
+          setDataSource((pre) => {
+            return pre.map((person) => {
+              if (person.id === editingPerson.id) {
+                return editingPerson;
+              } else {
+                return person;
+              }
+            });
+          });
+          resetEditing();
+        }}
+        centered
+      >
+        <Row style={{ flexDirection: "column", gap: "10px" }}>
+          <Col>
+            <label style={{ marginBottom: "5px" }}>Name</label>
+            <Input
+              placeholder="Name"
+              value={editingPerson?.name}
+              onChange={(e) => {
+                setEditingPerson((prev) => {
+                  return { ...prev, name: e.target.value };
+                });
+              }}
+            />
+          </Col>
+          <Col>
+            <label style={{ marginBottom: "5px" }}>Email</label>
+            <Input
+              placeholder="Email"
+              value={editingPerson?.email}
+              onChange={(e) => {
+                setEditingPerson((prev) => {
+                  return { ...prev, email: e.target.value };
+                });
+              }}
+            />
+          </Col>
+          <Col>
+            <label style={{ marginBottom: "5px" }}>Address</label>
+            <Input
+              placeholder="Address"
+              value={editingPerson?.address}
+              onChange={(e) => {
+                setEditingPerson((prev) => {
+                  return { ...prev, address: e.target.value };
+                });
+              }}
+            />
+          </Col>
+        </Row>
+      </Modal>
     </div>
   );
 };

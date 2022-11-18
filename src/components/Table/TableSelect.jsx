@@ -62,66 +62,64 @@ const TableSelect = () => {
     },
   ];
   return (
-    <div>
-      <div
-        style={{
-          gap: "20px",
-          padding: "20px",
-          margin: "20px",
-          border: "1px dashed blue",
-          display: "inline-flex",
-          justifyContent: "center",
-          alignItems: "center",
+    <div
+      style={{
+        gap: "20px",
+        padding: "20px",
+        margin: "20px",
+        border: "1px dashed blue",
+        display: "inline-flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Table
+        columns={columns}
+        dataSource={dataSource}
+        rowSelection={{
+          type: "checkbox",
+          selectedRowKeys: selectedRow,
+          onChange: (keys) => {
+            setSelectedRow(keys);
+          },
+          onSelect: (record) => {
+            console.log({ record });
+          },
+          // getCheckboxProps: (record) => ({
+          //   disabled: record.grade === "C",
+          // }),
+          // hideSelectAll: true
+          selections: [
+            Table.SELECTION_NONE,
+            Table.SELECTION_ALL,
+            Table.SELECTION_COLUMN,
+            Table.SELECTION_INVERT,
+            {
+              key: "even",
+              text: "Select Even Rows",
+              onSelect: (allKeys) => {
+                const selectedKeys = allKeys.filter((key) => {
+                  return key % 2 === 0;
+                });
+                setSelectedRow(selectedKeys);
+              },
+            },
+            {
+              key: "best",
+              text: "best score",
+              onSelect: (key) => {
+                const selectedKey = key.filter((e) => {
+                  const isExcelent = dataSource.find((student) => {
+                    return student.key === e && student.grade.includes("A");
+                  });
+                  return isExcelent;
+                });
+                setSelectedRow(selectedKey);
+              },
+            },
+          ],
         }}
-      >
-        <Table
-          columns={columns}
-          dataSource={dataSource}
-          rowSelection={{
-            type: "checkbox",
-            selectedRowKeys: selectedRow,
-            onChange: (keys) => {
-              setSelectedRow(keys);
-            },
-            onSelect: (record) => {
-              console.log({ record });
-            },
-            // getCheckboxProps: (record) => ({
-            //   disabled: record.grade === "C",
-            // }),
-            // hideSelectAll: true
-            selections: [
-              Table.SELECTION_NONE,
-              Table.SELECTION_ALL,
-              Table.SELECTION_COLUMN,
-              Table.SELECTION_INVERT,
-              {
-                key: "even",
-                text: "Select Even Rows",
-                onSelect: (allKeys) => {
-                  const selectedKeys = allKeys.filter((key) => {
-                    return key % 2 === 0;
-                  });
-                  setSelectedRow(selectedKeys);
-                },
-              },
-              {
-                key: "best",
-                text: "best score",
-                onSelect: (key) => {
-                  const selectedKey = key.filter((e) => {
-                    const isExcelent = dataSource.find((student) => {
-                      return student.key === e && student.grade.includes("A");
-                    });
-                    return isExcelent;
-                  });
-                  setSelectedRow(selectedKey);
-                },
-              },
-            ],
-          }}
-        ></Table>
-      </div>
+      ></Table>
     </div>
   );
 };

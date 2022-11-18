@@ -49,25 +49,23 @@ const TableFilter = () => {
     },
   ];
   return (
-    <div>
-      <div
-        style={{
-          gap: "20px",
-          padding: "20px",
-          margin: "20px",
-          border: "1px dashed blue",
-          display: "inline-flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Table
-          columns={columns}
-          dataSource={data}
-          loading={loading}
-          pagination={{ pageSize: 5 }}
-        ></Table>
-      </div>
+    <div
+      style={{
+        gap: "20px",
+        padding: "20px",
+        margin: "20px",
+        border: "1px dashed blue",
+        display: "inline-flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Table
+        columns={columns}
+        dataSource={data}
+        loading={loading}
+        pagination={{ pageSize: 5 }}
+      ></Table>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import "antd/dist/antd.min.css";
 import Buttons from "./components/Buttons/Buttons";
-import FormConf from "./components/Form/FormConfig";
 import FormValidation from "./components/Form/FormValidation";
 import Icons from "./components/Icons/Icons";
 import Inputs from "./components/Inputs/Inputs";
@@ -16,6 +15,7 @@ import Tabs from "./components/Tab/Tab";
 import Carousel from "./components/Carousel/Carousel";
 import Collapse from "./components/Collapse/Collapse";
 import "./Style.css";
+import FormDynamic from "./components/Form/FormDynamic";
 
 function App() {
   return (
@@ -25,13 +25,13 @@ function App() {
       <ProgressConfig />
       <Icons />
       <Inputs />
-      <FormConf />
       <TableConfig />
       <TableFilter />
       <TableSelect />
       <TableModify />
       <TableCellEdit />
       <FormValidation />
+      <FormDynamic />
       <Menu />
       <Tabs />
       <Carousel />
