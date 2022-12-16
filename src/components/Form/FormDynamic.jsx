@@ -1,4 +1,9 @@
-import { TeamOutlined, UserAddOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  MinusCircleOutlined,
+  TeamOutlined,
+  UserAddOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import React from "react";
 
@@ -52,21 +57,31 @@ const FormDynamic = () => {
                 return (
                   <div style={{ display: "flex", gap: "10px" }}>
                     <Form.Item
-                      key={field.key}
+                      key={index}
                       name={[field.name, "Name"]}
                       label={`Student nr.${index + 1} name`}
                       labelCol={{ span: 24 }}
+                      rules={[{ required: true, message: "Name is required" }]}
                     >
                       <Input placeholder="Name" />
                     </Form.Item>
                     <Form.Item
-                      key={field.key}
+                      key={index}
                       name={[field.name, "Surname"]}
                       label={`Student nr.${index + 1} surname`}
                       labelCol={{ span: 24 }}
+                      rules={[
+                        { required: true, message: "Surname is required" },
+                      ]}
                     >
                       <Input placeholder="Surname" />
                     </Form.Item>
+                    <MinusCircleOutlined
+                      style={{ color: "red", transform: "translateY(48px)" }}
+                      onClick={() => {
+                        remove(field.name);
+                      }}
+                    />
                   </div>
                 );
               })}

@@ -14,8 +14,10 @@ import Menu from "./components/Menu/Menu";
 import Tabs from "./components/Tab/Tab";
 import Carousel from "./components/Carousel/Carousel";
 import Collapse from "./components/Collapse/Collapse";
-import "./Style.css";
 import FormDynamic from "./components/Form/FormDynamic";
+import TableSearch from "./components/Table/TableSearch";
+import Timer from "./components/Timer/Timer.jsx";
+import "./Style.css";
 
 function App() {
   return (
@@ -30,12 +32,14 @@ function App() {
       <TableSelect />
       <TableModify />
       <TableCellEdit />
+      <TableSearch />
       <FormValidation />
       <FormDynamic />
       <Menu />
       <Tabs />
       <Carousel />
       <Collapse />
+      <Timer />
     </div>
   );
 }

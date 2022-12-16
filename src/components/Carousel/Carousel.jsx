@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 
 const CarouselComponent = () => {
   const ref = useRef();
+  const array = [1, 2, 3, 4, 5];
   return (
     <div
       style={{
@@ -25,7 +26,6 @@ const CarouselComponent = () => {
         draggable
         ref={ref}
         style={{
-          background: "green",
           width: "400px",
           height: "400px",
           display: "flex",
@@ -33,21 +33,26 @@ const CarouselComponent = () => {
           alignItems: "center",
         }}
       >
-        <div>
-          <h1 style={{ textAlign: "center" }}>Slide nr.1</h1>
-        </div>
-        <div>
-          <h1 style={{ textAlign: "center" }}>Slide nr.2</h1>
-        </div>
-        <div>
-          <h1 style={{ textAlign: "center" }}>Slide nr.3</h1>
-        </div>
-        <div>
-          <h1 style={{ textAlign: "center" }}>Slide nr.4</h1>
-        </div>
-        <div>
-          <h1 style={{ textAlign: "center" }}>Slide nr.5</h1>
-        </div>
+        {array.map((item, index) => {
+          const randomColor =
+            "#" + Math.floor(Math.random() * 16777215).toString(16);
+          return (
+            <div key={index}>
+              <div
+                style={{
+                  background: randomColor,
+                  width: "400px",
+                  height: "400px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <h1>Slide nr.{item}</h1>
+              </div>
+            </div>
+          );
+        })}
       </Carousel>
       <div style={{ display: "flex", gap: "10px" }}>
         <Button
