@@ -1,4 +1,4 @@
-import "antd/dist/antd.min.css";
+import "antd/dist/reset.css";
 import Buttons from "./components/Buttons/Buttons";
 import FormValidation from "./components/Form/FormValidation";
 import Icons from "./components/Icons/Icons";
@@ -17,6 +17,7 @@ import Collapse from "./components/Collapse/Collapse";
 import FormDynamic from "./components/Form/FormDynamic";
 import TableSearch from "./components/Table/TableSearch";
 import Timer from "./components/Timer/Timer.jsx";
+import TableEnterLeave from "./components/Animate/TableEnterLeave";
 import "./Style.css";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
       <Carousel />
       <Collapse />
       <Timer />
+      <TableEnterLeave />
     </div>
   );
 }

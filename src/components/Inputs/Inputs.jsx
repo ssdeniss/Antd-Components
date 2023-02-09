@@ -25,6 +25,7 @@ import {
   UploadOutlined,
   InboxOutlined,
 } from "@ant-design/icons";
+import moment from "moment";
 import { Typography } from "antd";
 import { useState } from "react";
 const { Paragraph } = Typography;
@@ -72,7 +73,23 @@ const Inputs = () => {
         <div style={{ display: "inline-flex", gap: "20px" }}>
           <DatePicker picker="date" />
           <DatePicker picker="time" />
-          <DatePicker.RangePicker picker="time" />
+          <div className="border__picker">
+            <h1>HERE IS EXAMPLE</h1>
+            <Form>
+              <Form.Item
+                name="dateRange"
+                initialValue={[moment("2022-01-01"), moment("2022-01-15")]}
+              >
+                <DatePicker.RangePicker />
+              </Form.Item>
+              <Form.Item
+                name="dateRange"
+                initialValue={[moment("2022-01-01"), moment("2022-01-15")]}
+              >
+                <DatePicker.RangePicker />
+              </Form.Item>
+            </Form>
+          </div>
           <Checkbox>Checkbox</Checkbox>
           <Radio>Radio</Radio>
 
